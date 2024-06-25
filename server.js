@@ -24,6 +24,8 @@ const io = new Server(server, {
   },
 });
 
+mongoose.set('strictQuery', true);
+
 app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
