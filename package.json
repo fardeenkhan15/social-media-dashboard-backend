@@ -20,9 +20,5 @@
     "mongoose": "^6.13.0",
     "multer": "^1.4.5-lts.1",
     "socket.io": "^4.7.5"
-  },
-
-  "devDependencies": {
-  "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
-}
+  }
 }
