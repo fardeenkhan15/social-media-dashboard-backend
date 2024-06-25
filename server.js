@@ -27,7 +27,7 @@ const corsOptions = {
   origin: function (origin, callback) {
     const allowedOrigins = [
       'http://localhost:3000',
-      'https://your-frontend-domain.com',
+      'https://social-media-dashboard-frontend1.netlify.app',
       
     ];
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
