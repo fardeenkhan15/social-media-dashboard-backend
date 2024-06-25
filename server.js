@@ -15,20 +15,20 @@ const User = require('./models/User');
 const Metrics = require('./models/Metrics');
 connectDB();
 
+// const app = express();
+// const server = http.createServer(app);
+// const io = new Server(server, {
+//   cors: corsOptions,
+// });
+
+
 const app = express();
-const server = http.createServer(app);
-const io = new Server(server, {
-  cors: corsOptions,
-});
-
-mongoose.set('strictQuery', true);
-
 const corsOptions = {
   origin: function (origin, callback) {
     const allowedOrigins = [
-      'http://localhost:3000',  // Local development
-      'https://your-frontend-domain.com', // Replace with your actual frontend domain
-      // Add any other domains that should be allowed to access your API
+      'http://localhost:3000',
+      'https://your-frontend-domain.com',
+      
     ];
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
@@ -39,6 +39,13 @@ const corsOptions = {
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 };
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: corsOptions,
+});
+
+mongoose.set('strictQuery', true);
+
 app.use(cors(corsOptions));
 io.cors = corsOptions;
 app.use(express.json());
