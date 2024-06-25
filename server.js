@@ -18,15 +18,29 @@ connectDB();
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
-  cors: {
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  },
+  cors: corsOptions,
 });
 
 mongoose.set('strictQuery', true);
 
-app.use(cors());
+const corsOptions = {
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'http://localhost:3000',  // Local development
+      'https://your-frontend-domain.com', // Replace with your actual frontend domain
+      // Add any other domains that should be allowed to access your API
+    ];
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+};
+app.use(cors(corsOptions));
+io.cors = corsOptions;
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
