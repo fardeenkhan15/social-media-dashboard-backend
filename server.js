@@ -22,6 +22,7 @@ connectDB();
 // });
 
 
+
 const app = express();
 const corsOptions = {
   origin: function (origin, callback) {
